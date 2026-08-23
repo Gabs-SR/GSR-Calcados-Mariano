@@ -2,7 +2,7 @@
   "name": "gsr-calcados-mariano",
   "version": "2.0.0",
   "private": true,
-  "description": "Vitrine e gerenciamento de catálogo da Calçados Mariano com PostgreSQL/Supabase.",
+  "description": "Vitrine e gerenciamento de catálogo da Calçados Mariano com PostgreSQL.",
   "main": "server.js",
   "engines": { "node": ">=22" },
   "scripts": {
