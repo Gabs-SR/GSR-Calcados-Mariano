@@ -4,14 +4,17 @@ const { carregarAmbiente } = require('./ambiente');
 carregarAmbiente();
 
 if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL não foi definida. Configure a conexão PostgreSQL/Supabase.');
+    throw new Error(
+        'DATABASE_URL não foi definida. Configure a URL do PostgreSQL no arquivo .env local ou nas variáveis de ambiente do Render.'
+    );
 }
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' || process.env.DB_SSL === 'true'
-        ? { rejectUnauthorized: false }
-        : undefined,
+    ssl:
+        process.env.NODE_ENV === 'production' || process.env.DB_SSL === 'true'
+            ? { rejectUnauthorized: false }
+            : undefined,
     max: Number(process.env.DB_POOL_MAX) || 10,
     idleTimeoutMillis: Number(process.env.DB_IDLE_TIMEOUT) || 30000,
     connectionTimeoutMillis: Number(process.env.DB_CONNECTION_TIMEOUT) || 10000
@@ -38,4 +41,10 @@ const verificarConexao = async () => {
     return true;
 };
 
-module.exports = { pool, query, buscarUm, buscarTodos, verificarConexao };
+module.exports = {
+    pool,
+    query,
+    buscarUm,
+    buscarTodos,
+    verificarConexao
+};
